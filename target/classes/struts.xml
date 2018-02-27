@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<!-- 防止*.css,*.js,*.png静态资源访问OpenSessionInViewFilter -->
+	<constant name="struts.action.extension" value="action" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 默认拦截器栈修改为二次参数绑定拦截器栈-->
+		<default-interceptor-ref name="paramsPrepareParamsStack" />
+		<!-- <global-results> -->
+		<!-- <result name="error">/WEB-INF/jsp/error.jsp</result> -->
+		<!-- </global-results> -->
+		<!-- 主页跳转，注意action顺序 -->
+		<action name="main_*" class="mainAction" method="{1}">
+			<result name="success" type="dispatcher">/WEB-INF/views/main.jsp</result>
+			<result name="right" type="dispatcher">/WEB-INF/views/main_right.jsp</result>
+		</action>
+		<!-- ①*代表访问的Action；②*代表访问的Action中的方法，默认execute() -->
+		<action name="*_*" class="{1}Action" method="{2}">
+			<result name="success" type="dispatcher">/WEB-INF/views/{1}/{1}.jsp</result>
+			<result name="input" type="dispatcher">/WEB-INF/views/{1}/{1}_input.jsp</result>
+			<result name="reload" type="redirectAction">{1}</result>
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,1 @@
+ssh=struts2+spring3+hibernate3

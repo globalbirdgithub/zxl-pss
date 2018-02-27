@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.share.pss.domain">
+	<class name="Employee" table="employee">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="username" column="username" type="string"/>
+		<property name="password" column="password" type="string"/>
+		<property name="email" column="email" type="string"/>
+		<property name="headImage" column="headImage" type="string" />
+		<property name="age" column="age" type="int" />
+		<many-to-one name="department" class="com.share.pss.domain.Department">
+			<column name="department_id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>
